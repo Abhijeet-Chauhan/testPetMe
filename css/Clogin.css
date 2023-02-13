@@ -104,7 +104,7 @@
     font-size: 16px;
     color: #2EA1A1;
   }
-  .button input{
+  .btn input{
     padding-left: 0;
     background: #2EA1A1;
     color: #fff;
@@ -114,9 +114,10 @@
     cursor: pointer;
     transition: all 0.3s linear;
   }
-  .button input:hover{
+  .btn input:hover{
     background: #31d2d2;
   }
+
   form .sign_up{
     text-align: center;
     margin-top: 25px;

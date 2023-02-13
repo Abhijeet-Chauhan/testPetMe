@@ -8,11 +8,11 @@
     display: grid;
     height: 100vh;
     place-items:center;
-    background: #2EA1A1;
+    background: #8d9494;
   }
   .main_div{
     width: 365px;
-    background: #fff;
+    background: rgb(255, 253, 253);
     padding: 30px;
     border-radius: 5px;
     box-shadow: 5px 5px 10px rgba(0, 0, 0, 0.15);
@@ -122,7 +122,7 @@
     margin-top: 25px;
   }
   .sign_up a{
-    color: #2EA1A1;
+    color: rgb(147, 141, 141);
   }
   form a{
     text-decoration: none;
