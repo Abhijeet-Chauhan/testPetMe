@@ -26,7 +26,11 @@
 
 <script defer src="https://use.fontawesome.com/releases/v5.0.7/js/all.js"></script>
 <script type="text/javascript" src="https://example.com/fontawesome/v6.2.1/js/conflict-detection.js"></script>
-    <link rel="stylesheet" href="css/styles.css">
+    
+
+
+
+<link rel="stylesheet" href="css/styles.css">
     <title>PetMe</title>
 </head>
 <body>
@@ -54,16 +58,146 @@
                         Account
                       </a>
                       <div class="dropdown-menu dropdown-menu-dark" aria-labelledby="navbarDropdown">
-                        <a class="dropdown-item" href="Ologin.html">Owner</a>
-                        <a class="dropdown-item" href="Clogin.html">Become a Care Taker</a>
-                        <!-- <div class="dropdown-divider"></div>
-                        <a class="dropdown-item" href="#">Something else here</a> -->
+                        <a class="dropdown-item" href="Ologin.html" data-toggle="modal" data-target="#modal">Owner</a>
+                        <a class="dropdown-item" href="Clogin.html" data-toggle="modal" data-target="#modal">Become a Care Taker</a>
+                        <div class="dropdown-divider"></div>
+                        <a class="dropdown-item" id="logout" onclick="logout()">Logout</a>
                       </div>
                     </li>
                   </ul>
             </div>
           </nav>
         </section>
+
+        <!-- Modal 1 Signup -->
+
+<div class="modal fade login-register-form"  id="modal" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true" role="dialog">
+  <div class="modal-dialog modal-dialog-centered">
+      <div class="modal-content">
+          <div class="modal-header">
+              <!-- <button type="button" class="close" data-dismiss="modal">
+                  <span class="glyphicon glyphicon-remove"></span>
+              </button> -->
+              <!-- <button type="button" class="btn btn-default btn-sm close" data-dismiss="modal">
+                <span class="glyphicon glyphicon-remove"></span> Close 
+              </button> -->
+              <ul class="nav nav-tabs">
+                  <li class="active"><a data-toggle="tab" href="#login-form"> Login <span class="glyphicon glyphicon-user"></span></a></li>
+                  <li><a data-toggle="tab" href="#registration-form"> Register <span class="glyphicon glyphicon-pencil"></span></a></li>
+              </ul>
+          </div>
+          <div class="modal-body">
+              <div class="tab-content">
+                  <div id="login-form" class="tab-pane fade in active">
+                      <form onsubmit="login(event)">
+                          <div class="form-group">
+                              <label for="email">Email:</label>
+                              <input type="email" class="form-control" id="email" placeholder="Enter email" name="email">
+                          </div>
+                          <div class="form-group">
+                              <label for="pwd">Password:</label>
+                              <input type="password" class="form-control" id="pwd" placeholder="Enter password" name="pwd">
+                          </div>
+                          <div class="checkbox">
+                              <label><input type="checkbox" name="remember"> Remember me</label>
+                          </div>
+                          <button type="submit" class="btn btn-default" id="my_button" onclick="OnState()">Login</button>
+                          
+                      </form>
+                      <button onclick="loginWithGoogle()" class="btn btn-default">Google</button>
+                  </div>
+                  <div id="registration-form" class="tab-pane fade">
+                      <form onsubmit="signup(event)" >
+                          <!-- <div class="form-group">
+                              <label for="name">Your Name:</label>
+                              <input type="text" class="form-control" id="name" placeholder="Enter your name" name="name">
+                          </div> -->
+                          <div class="form-group">
+                              <label for="newemail">Email:</label>
+                              <input type="email" class="form-control" id="newemail" placeholder="Enter new email" name="newemail">
+                          </div>
+                          <div class="form-group">
+                              <label for="newpwd">Password:</label>
+                              <input type="password" class="form-control" id="newpwd" placeholder="New password" name="newpwd">
+                          </div>
+                          <button type="submit" class="btn btn-default" id="my_button" onclick="OnState()">Register</button>
+                      </form>
+                      <button onclick="loginWithGoogle()" class="btn btn-default">Google</button>
+                  </div>
+
+              </div>
+          </div>
+                                   <div class="modal-footer">
+                                       <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                                   </div>
+      </div>
+  </div>
+</div>
+
+        <!-- Modal 2 Signup
+
+        <div class="modal fade login-register-form"  id="modal2" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true" role="dialog">
+          <div class="modal-dialog modal-dialog-centered">
+              <div class="modal-content">
+                  <div class="modal-header">
+                      <button type="button" class="close" data-dismiss="modal">
+                          <span class="glyphicon glyphicon-remove"></span>
+                      </button>
+                      <ul class="nav nav-tabs">
+                          <li class="active"><a data-toggle="tab" href="#login-form"> Login <span class="glyphicon glyphicon-user"></span></a></li>
+                          <li><a data-toggle="tab" href="#registration-form"> Register <span class="glyphicon glyphicon-pencil"></span></a></li>
+                      </ul>
+                  </div>
+                  <div class="modal-body">
+                      <div class="tab-content">
+                          <div id="login-form" class="tab-pane fade in active">
+                              <form action="/">
+                                  <div class="form-group">
+                                      <label for="email">Email:</label>
+                                      <input type="email" class="form-control" id="email" placeholder="Enter email" name="email">
+                                  </div>
+                                  <div class="form-group">
+                                      <label for="pwd">Password:</label>
+                                      <input type="password" class="form-control" id="pwd" placeholder="Enter password" name="pwd">
+                                  </div>
+                                  <div class="checkbox">
+                                      <label><input type="checkbox" name="remember"> Remember me</label>
+                                  </div>
+                                  <button type="submit" class="btn btn-default">Login</button>
+                              </form>
+                          </div>
+                          <div id="registration-form" class="tab-pane fade">
+                              <form action="/">
+                                  <div class="form-group">
+                                      <label for="name">Your Name:</label>
+                                      <input type="text" class="form-control" id="name" placeholder="Enter your name" name="name">
+                                  </div>
+                                  <div class="form-group">
+                                      <label for="newemail">Email:</label>
+                                      <input type="email" class="form-control" id="newemail" placeholder="Enter new email" name="newemail">
+                                  </div>
+                                  <div class="form-group">
+                                      <label for="newpwd">Password:</label>
+                                      <input type="password" class="form-control" id="newpwd" placeholder="New password" name="newpwd">
+                                  </div>
+                                  <button type="submit" class="btn btn-default">Register</button>
+                              </form>
+                          </div>
+        
+                      </div>
+                  </div>
+                                           <div class="modal-footer">
+                                               <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                                           </div>
+              </div>
+          </div>
+        </div> -->
+
+<div class="center">
+  <h1>Your account details</h1>
+  <div class="userDetails"></div>
+</div>
+
 
   <!-- Title-->
 <div class="container"></div>
@@ -210,15 +344,42 @@
   <i class="social-icon fab fa-twitter"></i>
   <i class="social-icon fab fa-instagram"></i>
   <i class="social-icon fab fa-envelop"></i>
-  <p><a class= "pp" href="">Privacy Policy</a> |<a class= "pp" href=""> Terms Of Service</a></p>
-  <p>© Copyright PetMe</p>
+  <p><a class= "pp" href="">Privacy Policy</a> | <a class= "pp" href="">Terms Of Service</a></p>
+  <p>© Copyright <a href="#index.html" style="color: black;">PetMe</a></p>
 </footer>
 
 
 
 
 
-<!-- <script src="js/index.js"> -->
+<script src="js/index.js"></script>
+<script src="js/firestore-db.js"></script>
+
+<script src="http://code.jquery.com/jquery-1.9.1.min.js"></script>
+<link href="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/2.0.1/css/toastr.css" rel="stylesheet"/>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/2.0.1/js/toastr.js"></script>
+
+<!-- firebase -->
+<script src="https://www.gstatic.com/firebasejs/8.2.9/firebase-app.js"></script>
+<script src="https://www.gstatic.com/firebasejs/8.2.9/firebase-auth.js"></script>
+<script src="https://www.gstatic.com/firebasejs/8.2.9/firebase-firestore.js"></script>
+
+<script> 
+
+var firebaseConfig = {
+  apiKey: "AIzaSyBIulU8XC2n0oy_KWnxbeWKBJAunwjrLCg",
+  authDomain: "authentication-aa575.firebaseapp.com",
+  projectId: "authentication-aa575",
+  storageBucket: "authentication-aa575.appspot.com",
+  messagingSenderId: "633252236356",
+  appId: "1:633252236356:web:98f22e4256e188023dc011"
+};
+
+// Initialize Firebase
+firebase.initializeApp(firebaseConfig);
+</script>
+
+
 
 </body>
 
