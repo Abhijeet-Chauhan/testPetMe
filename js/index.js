@@ -23,7 +23,7 @@ async function signup(e) {
           })
           createUserCollection(result.user)
 
-        //   await result.user.sendEmailVerification()
+          await result.user.sendEmailVerification()
         toastr.success(`Welcome ${result.user.email}, Please Login!`);
       
     console.log(result)
