@@ -100,3 +100,46 @@ function updateUserProfile(e){
     })
 
 }
+
+
+// function allUserDetails() {
+//     document.getElementById('caretaker').style.display='flex'
+//     const userRef = firebase.firestore().collection('users')
+
+//     userRef.onSnapshot(querysnap=>{
+//         querysnap.docs.forEach(doc=>{
+//             const info = doc.data()
+//             console.log(info)
+//         })
+//     })
+
+// }
+function allUserDetails(){
+    document.getElementById('caretakers').style.display='flex'
+    const userRef = firebase.firestore().collection("users")
+.where("role", "==", "caretaker")
+.get()
+.then(snap => {
+    snap.forEach(doc => {
+        const info = doc.data()
+        document.getElementById('caretakers').innerHTML += `
+       
+        <div class="col-sm-4"><div class="card">
+<div class="bg-image hover-overlay ripple" data-mdb-ripple-color="light">
+<img src="https://mdbcdn.b-cdn.net/img/new/standard/nature/111.webp" class="img-fluid"/>
+<a href="#!">
+<div class="mask" style="background-color: rgba(251, 251, 251, 0.15);"></div>
+</a>
+</div>
+<div class="card-body">
+  <h5 class="card-title">${info.name}</h5>
+  <p class="card-text">${info.email}</p>
+  <p class="card-text">${info.phone}</p>
+  <a href="#!" class="btn btn-primary">Button</a>
+  </div>
+</div></div>
+        `
+        console.log(doc.data());
+    });
+});
+}

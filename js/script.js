@@ -3,6 +3,9 @@ function careTaker() {
     window.location.assign("caretaker.html")
   }
 
+function service() {
+    allUserDetails()
+}
 
 
 // authentication
@@ -88,6 +91,7 @@ function OnState(){
             console.log(user)
             // getuserInfo(user.uid)
             getuserInfoRealtime(user.uid)
+            service()
         } else {
             // getuserInfo(null)
             getuserInfoRealtime(null)
