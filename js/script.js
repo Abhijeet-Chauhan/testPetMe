@@ -54,6 +54,8 @@ async function login(e) {
     try{
         const result = await firebase.auth().signInWithEmailAndPassword(email.value, password.value)
         toastr.success(`Welcome ${result.user.email}`);
+        
+        document.getElementById('caretakers').style.display='flex' //here is for showing
         toastr.info('Please Wait, Redirecting...');
     console.log(result)
     // const myTimeout = setTimeout(loginRedirect, 3000);
@@ -89,11 +91,11 @@ function OnState(){
     firebase.auth().onAuthStateChanged((user) => {
         if (user) {
             console.log(user)
-            // getuserInfo(user.uid)
+            getuserInfo(user.uid)
             getuserInfoRealtime(user.uid)
             service()
         } else {
-            // getuserInfo(null)
+            getuserInfo(null)
             getuserInfoRealtime(null)
             console.log("Signed Out");
     
@@ -106,6 +108,7 @@ function logout(){
      
     firebase.auth().signOut().then(() => {
       console.log("Signed Out");
+      document.getElementById('caretakers').style.display='none'//here is for showing
       toastr.success("Signed Out Successfully");
       
       userDetails.innerHTML = `
