@@ -1,29 +1,18 @@
-// alert("Welcome to Petme");
+// document.getElementById("logout").style.display = "none"; 
 
-// modal
-$('#modal').on('shown.bs.modal', function () {
-    $('#myInput').trigger('focus')
-  })
 
-const modal = document.querySelectorAll('.modal')
-
-$('#updateModal').on('shown.bs.modal', function () {
-    $('#myInput').trigger('focus')
-  })
-
-const updateModal = document.querySelectorAll('.updateModal')
 // authentication
 async function signup(e) {
     e.preventDefault()
     // const name = document.querySelector('#name')
-    const email = document.querySelector('#newemail')
-    const password = document.querySelector('#newpwd')
+    const email = document.querySelector('#nemail')
+    const password = document.querySelector('#npwd')
     console.log(email.value,password.value);
 
     try{
         const result = await firebase.auth().createUserWithEmailAndPassword(email.value, password.value)
         await result.user.updateProfile({
-            displayName: "User"
+            displayName: "CareTaker"
             // `${result.user.email}`
             // photoURL: "https://example.com/jane-q-user/profile.jpg"
           })
@@ -45,7 +34,7 @@ async function signup(e) {
 }
 
 // function loginRedirect() {
-//     window.location.assign("https://www.google.com")
+//     window.location.assign("owner.html")
 //   }
 
 
@@ -63,12 +52,9 @@ async function login(e) {
     // const myTimeout = setTimeout(loginRedirect, 3000);
         
     
-
     }catch(err){
         console.log(err)
-         toastr.error(err.message);   // Make custom message
-
-        
+         toastr.error(err.message);   // Make custom message  
     }
     email.value = ""
     password.value = ""
@@ -99,6 +85,7 @@ function OnState(){
             // getuserInfo(user.uid)
             getuserInfoRealtime(user.uid)
         } else {
+            // getuserInfo(null)
             getuserInfoRealtime(null)
             console.log("Signed Out");
     
@@ -108,23 +95,23 @@ function OnState(){
 
 
 function logout(){
-
+     
     firebase.auth().signOut().then(() => {
       console.log("Signed Out");
-      userDetails.innerHTML = `
-            <h3>Please Login</h3>
-
+      toastr.success("Signed Out Successfully");
+      
+      caretakerDetails.innerHTML = `
+      <a class="dropdown-item" href="#" data-mdb-toggle="modal"
+      data-mdb-target="#owner"
+      data-mdb-whatever="@mdo">Please Login</a>
             `
     //   alert("Logged Out!")
-      toastr.success("Signed Out Successfully");
+      
     }).catch((error) => {
       // An error happened.
     });
     }
     
-
-  
-
     async function loginWithGoogle(){
         try{
             var provider = new firebase.auth.GoogleAuthProvider();
@@ -135,7 +122,6 @@ function logout(){
             console.log(err)
         }
         
-    
     }
     
     
@@ -151,7 +137,3 @@ function logout(){
 //       toastr.success(`${result.user.email} Signed Out Successfully`);
 //     }
 //   });
-
-
-  
-

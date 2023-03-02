@@ -1,4 +1,4 @@
-const userDetails = document.querySelector('.userDetails')
+const caretakerDetails = document.querySelector('.caretakerDetails')
 const editProfile = document.querySelector('#editProfile')
 
 function updated() {
@@ -13,9 +13,8 @@ function createUserCollection(user){
         uid:user.uid,
         name:user.displayName,
         email:user.email,
-        petname:"",
-        pettype:"",
-        role: "owner"
+        phone:"",
+        role:"caretaker"
     })
 }
 
@@ -29,23 +28,24 @@ async function getuserInfo(userID){
     
         const userInfo = userInfoSnap.data()
         if(userInfo){
-            userDetails.innerHTML = `
+            caretakerDetails.innerHTML = `
             <a class="dropdown-item">${userInfo.name}</a>
                     <a class="dropdown-item" href="#">${userInfo.email}</a>
                     <a class="dropdown-item" href="#">${userInfo.phone}</a>
+                    <a class="dropdown-item" href="#">${userInfo.role}</a>
                     <button type="button" href="#editModal" class="btn btn-secondary btn-block" data-mdb-toggle="modal" data-mdb-target="#editModal">
                     Edit
 </button>
             `
           }
     } else {
-            userDetails.innerHTML = `<a class="dropdown-item" href="#" data-mdb-toggle="modal"
+            caretakerDetails.innerHTML = `<a class="dropdown-item" href="#" data-mdb-toggle="modal"
       data-mdb-target="#owner"
       data-mdb-whatever="@mdo">Please Login</a> `
     }
 
 }
-
+ // <a class="dropdown-item" href="#">${userInfo.email}</a>
 async function getuserInfoRealtime(userID){
     if(userID){
         const userdocRef = await firebase.firestore()
@@ -55,27 +55,24 @@ async function getuserInfoRealtime(userID){
             if(doc.exists){
                 const userInfo = doc.data()
                 if(userInfo){
-                    userDetails.innerHTML = `
+                    caretakerDetails.innerHTML = `
                     <a class="dropdown-item">${userInfo.name}</a>
-                    <a class="dropdown-item">${userInfo.role}</a>
-                    <a class="dropdown-item" href="#">${userInfo.email}</a>
-                    <a class="dropdown-item" href="#">PetName: ${userInfo.petname}</a>
-                    <a class="dropdown-item" href="#">${userInfo.pettype}</a>
-
+                    <a class="dropdown-item">${userInfo.phone}</a>
                     <button type="button" href="#editModal" class="btn btn-secondary btn-block" data-mdb-toggle="modal" data-mdb-target="#editModal">
                     Edit Profile
 </button>
                     `
                      editProfile["email"].value = userInfo.email
                      editProfile["profilename"].value = userInfo.name
+                     editProfile["phone"].value = userInfo.phone
                      
-                     editProfile["petname"].value = userInfo.petname
-                     editProfile["pettype"].value = userInfo.pettype
+                    //  editProfile["petname"].value = userInfo.petname
+                    //  editProfile["pettype"].value = userInfo.pettype
                 }
             } 
         })
 } else {
-    userDetails.innerHTML = `
+    caretakerDetails.innerHTML = `
     <a class="dropdown-item" href="#" data-mdb-toggle="modal"
               data-mdb-target="#owner"
               data-mdb-whatever="@mdo">Please Login </a>
@@ -95,8 +92,9 @@ function updateUserProfile(e){
     userDocRef.update({
         email:editProfile["email"].value,
         name:editProfile["profilename"].value,
-        petname:editProfile["petname"].value,
-        pettype:editProfile["pettype"].value
+        phone:editProfile["phone"].value,
+        // petname:editProfile["petname"].value,
+        // pettype:editProfile["pettype"].value
     })
 
 }

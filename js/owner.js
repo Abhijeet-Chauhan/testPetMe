@@ -1,17 +1,6 @@
-// alert("Welcome to Petme");
 
-// modal
-$('#modal').on('shown.bs.modal', function () {
-    $('#myInput').trigger('focus')
-  })
 
-const modal = document.querySelectorAll('.modal')
 
-$('#updateModal').on('shown.bs.modal', function () {
-    $('#myInput').trigger('focus')
-  })
-
-const updateModal = document.querySelectorAll('.updateModal')
 // authentication
 async function signup(e) {
     e.preventDefault()
@@ -111,34 +100,23 @@ function logout(){
 
     firebase.auth().signOut().then(() => {
       console.log("Signed Out");
+      toastr.success("Signed Out Successfully");
       userDetails.innerHTML = `
-            <h3>Please Login</h3>
-
+      <a class="dropdown-item" href="#" data-mdb-toggle="modal"
+      data-mdb-target="#owner"
+      data-mdb-whatever="@mdo">Please Login</a>
             `
     //   alert("Logged Out!")
-      toastr.success("Signed Out Successfully");
+      
     }).catch((error) => {
       // An error happened.
     });
     }
     
 
-  
 
-    async function loginWithGoogle(){
-        try{
-            var provider = new firebase.auth.GoogleAuthProvider();
-        const result = await firebase.auth()
-      .signInWithPopup(provider)
-      console.log(result)
-        }catch(err){
-            console.log(err)
-        }
-        
     
-    }
-    
-    
+
 // function logout(){
 //     firebase.auth().signOut()
 // }
@@ -151,7 +129,3 @@ function logout(){
 //       toastr.success(`${result.user.email} Signed Out Successfully`);
 //     }
 //   });
-
-
-  
-
