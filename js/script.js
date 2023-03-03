@@ -3,6 +3,14 @@ function careTaker() {
     window.location.assign("caretaker.html")
   }
 
+  function news() {
+    window.location.assign("news.html")
+  }
+
+  function contact() {
+    window.location.assign("contact/contact.html")
+  }
+
 function service() {
     allUserDetails()
 }
